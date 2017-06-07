@@ -40,7 +40,8 @@ namespace Template_P3
             floor.Mesh.Texture = "assets/wood.jpg";
             // create camera
             Camera camera = new Camera();
-            camera.transform.Translate(new Vector3(0, -4, -20));
+            camera.transform.RotateWorld(new Vector3(1, 0, 0), 0.2f * PI);
+            camera.transform.TranslateWorld(new Vector3(0, 0, -20));
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             sceneGraph.Add(teapot);
@@ -72,12 +73,10 @@ namespace Template_P3
             timer.Reset();
             timer.Start();
 
-            // prepare matrix for vertex shader
-            floor.transform.Clear();
-            floor.transform.Rotate(new Vector3(0, -1, 0), a);
-            teapot.transform.Clear();
-            teapot.transform.Translate(new Vector3(0, 10, 5));
-            teapot.transform.Rotate(new Vector3(0, -1, 0), a);
+            // rotate teapot around a point
+            teapot.transform.RotateAround(new Vector3(0, 0, 3), new Vector3(0, 0, 3), new Vector3(0, 1, 0), a);
+
+            //TODO fix model space call, with clear
 
             // update rotation
             a += 0.001f * frameDuration;

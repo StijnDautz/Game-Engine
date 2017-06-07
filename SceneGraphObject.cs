@@ -36,10 +36,11 @@ namespace Template_P3
         {
             if (visible)
             {
-                _mesh.Render(shader, transform.ToWorld * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
+                Matrix4 recursive = transform.Model * transform.ToWorld;
+                _mesh.Render(shader, recursive * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
                 foreach (SceneGraphObject o in _children)
                 {
-                    o.Render(shader, transform.ToWorld);
+                    o.Render(shader, recursive);
                 }
             }
         }
