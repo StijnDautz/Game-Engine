@@ -40,6 +40,7 @@ namespace Template_P3
             floor.Mesh.Texture = "assets/wood.jpg";
             // create camera
             Camera camera = new Camera();
+            camera.transform.Translate(new Vector3(0, -4, -20));
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             sceneGraph.Add(teapot);
