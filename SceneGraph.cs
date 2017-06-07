@@ -1,5 +1,4 @@
-﻿using OpenTK;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Template_P3
 {
@@ -34,6 +33,14 @@ namespace Template_P3
                 }
             }
             _children.Add(o);
+        }
+
+        public void OnRenderFrame(float elapsedTime)
+        {
+            foreach(SceneGraphObject o in _children)
+            {
+                o.OnRenderFrame(elapsedTime);
+            }
         }
     }
 }

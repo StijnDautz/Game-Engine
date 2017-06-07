@@ -57,5 +57,10 @@ namespace Template_P3
                 }
             }
         }
+
+        public virtual void OnRenderFrame(float elapsedTime)
+        {
+
+        }
     }
 }

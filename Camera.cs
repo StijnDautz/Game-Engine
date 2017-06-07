@@ -9,9 +9,9 @@ namespace Template_P3
             visible = false;
         }
 
-        public void SetPerspective()
+        public override void OnRenderFrame(float elapsedTime)
         {
-
+            
         }
     }
 }

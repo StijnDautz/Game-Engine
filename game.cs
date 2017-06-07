@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 
 // minimal OpenTK rendering framework for UU/INFOGR
 // Jacco Bikker, 2016
@@ -59,28 +57,30 @@ namespace Template_P3
         }
 
         // tick for background surface
-        public void Tick()
+        public void OnRenderFrame()
         {
             screen.Clear(0);
             screen.Print("hello world", 2, 2, 0xffff00);
+
+            // measure frame duration
+            float frameTime = timer.ElapsedMilliseconds;
+            timer.Reset();
+            timer.Start();
+
+            // call OnRenderFrame on all objects in the scene
+            sceneGraph.OnRenderFrame(frameTime);
+
+            //TODO add teapot class
+            // update rotation o teapot
+            a += 0.001f * frameTime;
+            if (a > 2 * PI) a -= 2 * PI;
         }
 
         // tick for OpenGL rendering code
         public void RenderGL()
         {
-            // measure frame duration
-            float frameDuration = timer.ElapsedMilliseconds;
-            timer.Reset();
-            timer.Start();
-
             // rotate teapot around a point
             teapot.transform.RotateAround(new Vector3(0, 0, 3), new Vector3(0, 0, 3), new Vector3(0, 1, 0), a);
-
-            //TODO fix model space call, with clear
-
-            // update rotation
-            a += 0.001f * frameDuration;
-            if (a > 2 * PI) a -= 2 * PI;
 
             if (useRenderTarget)
             {
