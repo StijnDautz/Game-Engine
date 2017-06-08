@@ -18,19 +18,17 @@ namespace Template_P3
         {
             foreach(SceneGraphObject o in _children)
             {
-                o.Render(shader, _camera.transform.World);
+                o.Render(shader, _camera);
             }
         }
 
         public void Add(SceneGraphObject o)
         {
+            //if o is Camera add it to _cameras and check it should be used as the main camera
             if(o is Camera)
             {
                 _cameras.Add(o as Camera);
-                if(_camera == null)
-                {
-                    _camera = o as Camera;
-                }
+                if (_camera == null) _camera = o as Camera;
             }
             _children.Add(o);
         }

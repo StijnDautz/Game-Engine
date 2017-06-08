@@ -19,7 +19,6 @@ namespace Template_P3
 
         public void Clear()
         {
-
             _toWorld = Matrix4.Identity;
         }
 

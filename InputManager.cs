@@ -8,6 +8,9 @@ namespace Template_P3
         KeyboardState previousKBState, currentKBState;
         MouseState previousMState, currentMState;
 
+        /*
+         * KEYBOARD
+         */
         public bool KeyDown(Key k)
         {
             return currentKBState.IsKeyDown(k);
@@ -19,6 +22,9 @@ namespace Template_P3
             return previousKBState.IsKeyUp(k) && currentKBState.IsKeyDown(k);
         }
         
+        /*
+         * MOUSE
+         */
         public bool LeftMouseButtonDown
         {
             get { return currentMState.LeftButton == ButtonState.Pressed; }
@@ -34,7 +40,7 @@ namespace Template_P3
             get { return currentMState.Scroll.Y - previousMState.Scroll.Y; }
         }
 
-        public Point g
+        public Point MousePos
         {
             get { return new Point(currentMState.X - previousMState.X, currentMState.Y - previousMState.Y); }
         }

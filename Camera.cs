@@ -6,10 +6,12 @@ namespace Template_P3
     class Camera : SceneGraphObject
     {
         private int _sensitivity;
+        public Matrix4 perspective;
 
         public Camera()
         {
             _sensitivity = 10;
+            perspective = Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100);
             visible = false;
         }
 
@@ -31,7 +33,7 @@ namespace Template_P3
             transform.TranslateModel(new Vector3(0, 0, 30 * input.ScrollWheel * elapsedTime));
             /// rotation using the mouse
             if (input.LeftMouseButtonDown)
-            { transform.RotateModel(new Vector3(1, 0, 0), 0.001f * input.g.Y); transform.RotateModel(new Vector3(0, 1, 0), 0.001f * input.g.X); }
+            { transform.RotateModel(new Vector3(1, 0, 0), 0.001f * input.MousePos.Y); transform.RotateModel(new Vector3(0, 1, 0), 0.001f * input.MousePos.X); }
         }
     }
 }

@@ -32,29 +32,36 @@ namespace Template_P3
             _mesh = new Mesh(fileName);
         }
 
-        public void Render(Shader shader, Matrix4 cameraMatrix)
+        // this function is called if the object has no parent, so there's no parentMatrix involved in the calculations
+        public void Render(Shader shader, Camera camera)
         {
             if (visible)
             {
-                _mesh.Render(shader, transform.World * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
-                foreach (SceneGraphObject o in _children)
-                {
-                    o.Render(shader, transform.World);
-                }
+                /// render the object's mesh
+                RenderMesh(shader, camera, transform.World);
+                /// render this object's children
+                foreach (SceneGraphObject o in _children) o.Render(shader, camera, transform.World);
             }
         }
 
-        private void Render(Shader shader, Matrix4 cameraMatrix, Matrix4 wm)
+        // this function is called by the object's parent and has an additional parentMatrix compared to the other Render method
+        private void Render(Shader shader, Camera camera, Matrix4 parentMatrix)
         {
             if (visible)
             {
-                Matrix4 recursiveMatrix = transform.World * wm;
-                _mesh.Render(shader, recursiveMatrix * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
-                foreach (SceneGraphObject o in _children)
-                {
-                    o.Render(shader, recursiveMatrix);
-                }
+                /// multiply this object's world matrix with its parent's one
+                Matrix4 recursiveMatrix = transform.World * parentMatrix;
+                /// render this object's mesh
+                RenderMesh(shader, camera, recursiveMatrix);
+                /// render this object's children
+                foreach (SceneGraphObject o in _children) o.Render(shader, camera, recursiveMatrix);
             }
+        }
+
+        // render the mesh
+        private void RenderMesh(Shader shader, Camera camera, Matrix4 world)
+        {
+            _mesh.Render(shader, world * camera.transform.World * camera.perspective);
         }
 
         public virtual void OnRenderFrame(float elapsedTime)

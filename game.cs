@@ -76,6 +76,9 @@ namespace Template_P3
             sceneGraph.OnRenderFrame(frameTime);
 
             //TODO add teapot class
+            // rotate teapot around a point
+            teapot.transform.RotateAround(new Vector3(0, 0, 3), new Vector3(0, 0, 3), new Vector3(0, 1, 0), a);
+
             // update rotation o teapot
             a += frameTime;
             if (a > 2 * PI) a -= 2 * PI;
@@ -84,9 +87,6 @@ namespace Template_P3
         // tick for OpenGL rendering code
         public void RenderGL()
         {
-            // rotate teapot around a point
-            teapot.transform.RotateAround(new Vector3(0, 0, 3), new Vector3(0, 0, 3), new Vector3(0, 1, 0), a);
-
             if (useRenderTarget)
             {
                 // enable render target
