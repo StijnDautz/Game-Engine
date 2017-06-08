@@ -6,7 +6,6 @@ using OpenTK;
 
 namespace Template_P3
 {
-
     class Game
     {
         // member variables
@@ -21,6 +20,7 @@ namespace Template_P3
         ScreenQuad quad;                        // screen filling quad for post processing
         bool useRenderTarget = true;
         SceneGraph sceneGraph;
+        public static InputManager inputManager;
 
         // initialize
         public void Init()
@@ -38,8 +38,8 @@ namespace Template_P3
             floor.Mesh.Texture = "assets/wood.jpg";
             // create camera
             Camera camera = new Camera();
-            camera.transform.RotateWorld(new Vector3(1, 0, 0), 0.2f * PI);
-            camera.transform.TranslateWorld(new Vector3(0, 0, -20));
+            camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
+            camera.transform.TranslateModel(new Vector3(0, 0, -20));
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             sceneGraph.Add(teapot);
@@ -54,6 +54,8 @@ namespace Template_P3
             // create the render target
             target = new RenderTarget(screen.width, screen.height);
             quad = new ScreenQuad();
+            //create inputmanager
+            inputManager = new InputManager();
         }
 
         // tick for background surface
@@ -62,8 +64,11 @@ namespace Template_P3
             screen.Clear(0);
             screen.Print("hello world", 2, 2, 0xffff00);
 
+            //update inputManager
+            inputManager.Update();
+
             // measure frame duration
-            float frameTime = timer.ElapsedMilliseconds;
+            float frameTime = 0.001f * timer.ElapsedMilliseconds;
             timer.Reset();
             timer.Start();
 
@@ -72,7 +77,7 @@ namespace Template_P3
 
             //TODO add teapot class
             // update rotation o teapot
-            a += 0.001f * frameTime;
+            a += frameTime;
             if (a > 2 * PI) a -= 2 * PI;
         }
 

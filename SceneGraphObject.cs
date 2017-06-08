@@ -36,11 +36,10 @@ namespace Template_P3
         {
             if (visible)
             {
-                Matrix4 recursive = transform.Model * transform.ToWorld;
-                _mesh.Render(shader, recursive * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
+                _mesh.Render(shader, transform.World * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
                 foreach (SceneGraphObject o in _children)
                 {
-                    o.Render(shader, recursive);
+                    o.Render(shader, transform.World);
                 }
             }
         }
@@ -49,7 +48,7 @@ namespace Template_P3
         {
             if (visible)
             {
-                Matrix4 recursiveMatrix = transform.ToWorld * wm;
+                Matrix4 recursiveMatrix = transform.World * wm;
                 _mesh.Render(shader, recursiveMatrix * cameraMatrix * Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.3f, .1f, 100));
                 foreach (SceneGraphObject o in _children)
                 {

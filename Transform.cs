@@ -4,34 +4,22 @@ namespace Template_P3
 {
     class Transform
     {
-        private Matrix4 _model, _toWorld, _toScreen;
-        private Vector3 _worldPos;
+        private Matrix4 _model, _toWorld;
 
-        public Matrix4 Model
+        public Matrix4 World
         {
-            get { return _model; }
-        }
-
-        public Matrix4 ToWorld
-        {
-            get { return _toWorld; }
-        }
-
-        public Matrix4 toScreen
-        {
-            get { return _toScreen; }
+            get { return _model * _toWorld; }
         }
         
         public Transform()
         {
             _model = Matrix4.Identity;
             _toWorld = Matrix4.Identity;
-            _toScreen = Matrix4.Identity;
-            _worldPos = Vector3.Zero;
         }
 
         public void Clear()
         {
+
             _toWorld = Matrix4.Identity;
         }
 
