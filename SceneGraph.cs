@@ -1,5 +1,4 @@
-﻿using OpenTK;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Template_P3
 {
@@ -19,21 +18,27 @@ namespace Template_P3
         {
             foreach(SceneGraphObject o in _children)
             {
-                o.Render(shader, _camera.transform.ToWorld);
+                o.Render(shader, _camera);
             }
         }
 
         public void Add(SceneGraphObject o)
         {
+            //if o is Camera add it to _cameras and check it should be used as the main camera
             if(o is Camera)
             {
                 _cameras.Add(o as Camera);
-                if(_camera == null)
-                {
-                    _camera = o as Camera;
-                }
+                if (_camera == null) _camera = o as Camera;
             }
             _children.Add(o);
+        }
+
+        public void OnRenderFrame(float elapsedTime)
+        {
+            foreach(SceneGraphObject o in _children)
+            {
+                o.OnRenderFrame(elapsedTime);
+            }
         }
     }
 }

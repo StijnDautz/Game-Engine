@@ -1,14 +1,11 @@
 ﻿using System.Diagnostics;
 using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 
 // minimal OpenTK rendering framework for UU/INFOGR
 // Jacco Bikker, 2016
 
 namespace Template_P3
 {
-
     class Game
     {
         // member variables
@@ -23,6 +20,7 @@ namespace Template_P3
         ScreenQuad quad;                        // screen filling quad for post processing
         bool useRenderTarget = true;
         SceneGraph sceneGraph;
+        public static InputManager inputManager;
 
         // initialize
         public void Init()
@@ -40,6 +38,8 @@ namespace Template_P3
             floor.Mesh.Texture = "assets/wood.jpg";
             // create camera
             Camera camera = new Camera();
+            camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
+            camera.transform.TranslateModel(new Vector3(0, 0, -20));
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             sceneGraph.Add(teapot);
@@ -54,34 +54,39 @@ namespace Template_P3
             // create the render target
             target = new RenderTarget(screen.width, screen.height);
             quad = new ScreenQuad();
+            //create inputmanager
+            inputManager = new InputManager();
         }
 
         // tick for background surface
-        public void Tick()
+        public void OnRenderFrame()
         {
             screen.Clear(0);
             screen.Print("hello world", 2, 2, 0xffff00);
+
+            //update inputManager
+            inputManager.Update();
+
+            // measure frame duration
+            float frameTime = 0.001f * timer.ElapsedMilliseconds;
+            timer.Reset();
+            timer.Start();
+
+            // call OnRenderFrame on all objects in the scene
+            sceneGraph.OnRenderFrame(frameTime);
+
+            //TODO add teapot class
+            // rotate teapot around a point
+            teapot.transform.RotateAround(new Vector3(0, 0, 3), new Vector3(0, 0, 3), new Vector3(0, 1, 0), a);
+
+            // update rotation o teapot
+            a += frameTime;
+            if (a > 2 * PI) a -= 2 * PI;
         }
 
         // tick for OpenGL rendering code
         public void RenderGL()
         {
-            // measure frame duration
-            float frameDuration = timer.ElapsedMilliseconds;
-            timer.Reset();
-            timer.Start();
-
-            // prepare matrix for vertex shader
-            floor.transform.Clear();
-            floor.transform.Rotate(new Vector3(0, -1, 0), a);
-            teapot.transform.Clear();
-            teapot.transform.Translate(new Vector3(0, 10, 5));
-            teapot.transform.Rotate(new Vector3(0, -1, 0), a);
-
-            // update rotation
-            a += 0.001f * frameDuration;
-            if (a > 2 * PI) a -= 2 * PI;
-
             if (useRenderTarget)
             {
                 // enable render target
