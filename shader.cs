@@ -3,7 +3,7 @@ using System.IO;
 using OpenTK.Graphics.OpenGL;
 
 namespace Template_P3 {
-
+    // TODO read about shaders in book blz 447
 public class Shader
 {
 	// data members

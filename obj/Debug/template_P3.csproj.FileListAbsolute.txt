@@ -6,3 +6,11 @@ D:\Users\Stijn\Documents\School\Graphics\Game Engine\bin\Debug\OpenTK.dll
 D:\Users\Stijn\Documents\School\Graphics\Game Engine\bin\Debug\OpenTK.dll.config
 D:\Users\Stijn\Documents\School\Graphics\Game Engine\obj\Debug\template_P3.exe
 D:\Users\Stijn\Documents\School\Graphics\Game Engine\obj\Debug\template_P3.pdb
+C:\Users\dautz\Documents\School\Graphics\Game engine\bin\Debug\template_P3.exe.config
+C:\Users\dautz\Documents\School\Graphics\Game engine\bin\Debug\template_P3.exe
+C:\Users\dautz\Documents\School\Graphics\Game engine\bin\Debug\template_P3.pdb
+C:\Users\dautz\Documents\School\Graphics\Game engine\bin\Debug\OpenTK.dll
+C:\Users\dautz\Documents\School\Graphics\Game engine\bin\Debug\OpenTK.dll.config
+C:\Users\dautz\Documents\School\Graphics\Game engine\obj\Debug\template_P3.csprojResolveAssemblyReference.cache
+C:\Users\dautz\Documents\School\Graphics\Game engine\obj\Debug\template_P3.exe
+C:\Users\dautz\Documents\School\Graphics\Game engine\obj\Debug\template_P3.pdb
