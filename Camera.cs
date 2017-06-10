@@ -8,6 +8,11 @@ namespace Template_P3
         private int _sensitivity;
         public Matrix4 perspective;
 
+        public Matrix4 toScreen
+        {
+            get { return transform.World * perspective; }
+        }
+
         public Camera()
         {
             _sensitivity = 10;

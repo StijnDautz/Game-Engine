@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using OpenTK;
+using System;
 
 // minimal OpenTK rendering framework for UU/INFOGR
 // Jacco Bikker, 2016
@@ -21,6 +22,7 @@ namespace Template_P3
         bool useRenderTarget = true;
         SceneGraph sceneGraph;
         public static InputManager inputManager;
+        public float time, frames;
 
         // initialize
         public void Init()
@@ -69,6 +71,16 @@ namespace Template_P3
 
             // measure frame duration
             float frameTime = 0.001f * timer.ElapsedMilliseconds;
+
+            // write FPS to console
+            time += frameTime;
+            frames++;
+            if(time > 1)
+            {
+                Console.WriteLine("FPS: " + frames);
+                time = 0;
+                frames = 0;
+            }
             timer.Reset();
             timer.Start();
 

@@ -33,35 +33,35 @@ namespace Template_P3
         }
 
         // this function is called if the object has no parent, so there's no parentMatrix involved in the calculations
-        public void Render(Shader shader, Camera camera)
+        public void Render(Shader shader, Matrix4 toScreen)
         {
             if (visible)
             {
                 /// render the object's mesh
-                RenderMesh(shader, camera, transform.World);
+                RenderMesh(shader, toScreen, transform.World);
                 /// render this object's children
-                foreach (SceneGraphObject o in _children) o.Render(shader, camera, transform.World);
+                foreach (SceneGraphObject o in _children) o.Render(shader, toScreen, transform.World);
             }
         }
 
         // this function is called by the object's parent and has an additional parentMatrix compared to the other Render method
-        private void Render(Shader shader, Camera camera, Matrix4 parentMatrix)
+        private void Render(Shader shader, Matrix4 toScreen, Matrix4 parentMatrix)
         {
             if (visible)
             {
                 /// multiply this object's world matrix with its parent's one
                 Matrix4 recursiveMatrix = transform.World * parentMatrix;
                 /// render this object's mesh
-                RenderMesh(shader, camera, recursiveMatrix);
+                RenderMesh(shader, toScreen, recursiveMatrix);
                 /// render this object's children
-                foreach (SceneGraphObject o in _children) o.Render(shader, camera, recursiveMatrix);
+                foreach (SceneGraphObject o in _children) o.Render(shader, toScreen, recursiveMatrix);
             }
         }
 
         // render the mesh
-        private void RenderMesh(Shader shader, Camera camera, Matrix4 world)
+        private void RenderMesh(Shader shader, Matrix4 toScreen, Matrix4 world)
         {
-            _mesh.Render(shader, world * camera.transform.World * camera.perspective);
+            _mesh.Render(shader, world * toScreen);
         }
 
         public virtual void OnRenderFrame(float elapsedTime)
