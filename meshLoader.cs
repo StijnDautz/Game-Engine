@@ -124,10 +124,10 @@ public class MeshLoader
 							else normalIndex = normalIndex - 1;
             normal = normals[normalIndex];
         }
-        return AddObjVertex( ref vertex, ref texCoord, ref normal );
+            return AddObjVertex(ref vertex, ref texCoord, ref normal);
     }
 
-    int AddObjVertex( ref Vector3 vertex, ref Vector2 texCoord, ref Vector3 normal )
+    int AddObjVertex( ref Vector3 vertex, ref Vector2 texCoord, ref Vector3 normal)
     {
         Mesh.ObjVertex newObjVertex = new Mesh.ObjVertex();
         newObjVertex.Vertex = vertex;

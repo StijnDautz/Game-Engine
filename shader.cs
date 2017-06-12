@@ -11,7 +11,11 @@ namespace Template_P3
         public int attribute_vpos;
         public int attribute_vnrm;
         public int attribute_vuvs;
-        public int uniform_mview;
+        public int uniform_color;
+        public int uniform_toWorld;
+        public int uniform_mcamera;
+        public int uniform_lightcount;
+        public int uniform_lights;
 
         // constructor
         public Shader(String vertexShader, String fragmentShader)
@@ -30,7 +34,11 @@ namespace Template_P3
             attribute_vpos = GL.GetAttribLocation(programID, "vPosition");
             attribute_vnrm = GL.GetAttribLocation(programID, "vNormal");
             attribute_vuvs = GL.GetAttribLocation(programID, "vUV");
-            uniform_mview = GL.GetUniformLocation(programID, "transform");
+            uniform_toWorld = GL.GetUniformLocation(programID, "toWorld");
+            uniform_mcamera = GL.GetUniformLocation(programID, "mCamera");
+            uniform_color = GL.GetUniformLocation(programID, "color");
+            uniform_lightcount = GL.GetUniformLocation(programID, "lightcount");
+            uniform_lights = GL.GetUniformLocation(programID, "lights");
         }
 
         // loading shaders

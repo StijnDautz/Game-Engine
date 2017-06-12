@@ -5,7 +5,6 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template_P3
 {
-
     // mesh and loader based on work by JTalton; http://www.opentk.com/node/642
 
     public class Mesh
@@ -16,6 +15,7 @@ namespace Template_P3
         public ObjQuad[] quads;                             // quads (4 vertex indices)
         int vertexBufferId, triangleBufferId, quadBufferId; // vertex buffer, triangle buffer, quad buffer
         private Texture _texture;
+        private Vector3 color;
 
         public string Texture
         {
@@ -27,6 +27,7 @@ namespace Template_P3
         {
             MeshLoader loader = new MeshLoader();
             loader.Load(this, "../../" + fileName);
+            color = new Vector3(0, 0, 0);
         }
 
         // initialization; called during first render
@@ -51,7 +52,7 @@ namespace Template_P3
         }
 
         // render the mesh using the supplied shader and matrix
-        public void Render(Shader shader, Matrix4 transform)
+        public void Render(Shader shader, Matrix4 toWorld, Matrix4 cameraMatrix)
         {
             // on first run, prepare buffers
             Prepare(shader);
@@ -64,12 +65,27 @@ namespace Template_P3
                 GL.ActiveTexture(TextureUnit.Texture0);
                 GL.BindTexture(TextureTarget.Texture2D, _texture.id);
             }
+            int lightCount = 2;
+            float[] lightPositions = new float[3 * lightCount];
+            lightPositions[0] = -7f;
+            lightPositions[1] = -7f;
+            lightPositions[2] = -7f;
 
-            // enable shader
+            // enable shader, so variables can be passed to the shader
             GL.UseProgram(shader.programID);
 
-            // pass transform to vertex shader
-            GL.UniformMatrix4(shader.uniform_mview, false, ref transform);
+            // pass uniform variabls to 
+            //TODO retrieve this value from sceneGraph
+            GL.Uniform3(shader.uniform_color, color);
+            GL.UniformMatrix4(shader.uniform_toWorld, false, ref toWorld);
+            GL.UniformMatrix4(shader.uniform_mcamera, false, ref cameraMatrix);
+            
+            lightPositions[3] = 5f;
+            lightPositions[4] = 10f;
+            lightPositions[5] = 10f;
+            // pass lightpositions in a float[lightCount * 3], representing vector3's
+            GL.Uniform1(shader.uniform_lights, 3 * lightCount, lightPositions);
+            GL.Uniform1(shader.uniform_lightcount, lightCount);
 
             // bind interleaved vertex data
             GL.EnableClientState(ArrayCap.VertexArray);
@@ -108,6 +124,7 @@ namespace Template_P3
             public Vector2 TexCoord;
             public Vector3 Normal;
             public Vector3 Vertex;
+            //public Vector3 Color;
         }
 
         // layout of a single triangle
