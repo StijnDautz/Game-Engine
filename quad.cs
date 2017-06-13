@@ -45,7 +45,6 @@ public class ScreenQuad
 		// enable position and uv attributes
 		GL.EnableVertexAttribArray( shader.attribute_vpos );
 		GL.EnableVertexAttribArray( shader.attribute_vuvs );
-        //GL.EnableVertexAttribArray(shader.attribute_vcol);
 
         // bind interleaved vertex data
         GL.EnableClientState( ArrayCap.VertexArray );
@@ -55,7 +54,6 @@ public class ScreenQuad
 		// link vertex attributes to shader parameters 
 		GL.VertexAttribPointer( shader.attribute_vpos, 3, VertexAttribPointerType.Float, false, 20, 0 );
 		GL.VertexAttribPointer( shader.attribute_vuvs, 2, VertexAttribPointerType.Float, false, 20, 3 * 4 );
-        //GL.VertexAttribPointer(shader.attribute_vcol, 3, VertexAttribPointerType.Float, false, 20, 5 * 4);
 
         // bind triangle index data and render
         GL.BindBuffer( BufferTarget.ElementArrayBuffer, vbo_idx );

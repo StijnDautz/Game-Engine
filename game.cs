@@ -27,6 +27,24 @@ namespace Template_P3
         // initialize
         public void Init()
         {
+            // initialize stopwatch
+            timer = new Stopwatch();
+            timer.Reset();
+            timer.Start();
+            // create shaders
+            shader = new Shader("../../shaders/vs.glsl", "../../shaders/fs.glsl");
+            postproc = new Shader("../../shaders/vs_post.glsl", "../../shaders/fs_post.glsl");
+            // create the render target
+            target = new RenderTarget(screen.width, screen.height);
+            quad = new ScreenQuad();
+            // create inputmanager
+            inputManager = new InputManager();
+            // add objects to scenegraph
+            AddObjects();
+        }
+
+        private void AddObjects()
+        {
             // create SceneGraph
             sceneGraph = new SceneGraph();
             // create sceneGraphObjects
@@ -42,22 +60,12 @@ namespace Template_P3
             Camera camera = new Camera();
             camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
             camera.transform.TranslateModel(new Vector3(0, 0, -20));
+            // add lights
+            sceneGraph.Add(new Light());
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             sceneGraph.Add(teapot);
             sceneGraph.Add(camera);
-            // initialize stopwatch
-            timer = new Stopwatch();
-            timer.Reset();
-            timer.Start();
-            // create shaders
-            shader = new Shader("../../shaders/vs.glsl", "../../shaders/fs.glsl");
-            postproc = new Shader("../../shaders/vs_post.glsl", "../../shaders/fs_post.glsl");
-            // create the render target
-            target = new RenderTarget(screen.width, screen.height);
-            quad = new ScreenQuad();
-            //create inputmanager
-            inputManager = new InputManager();
         }
 
         // tick for background surface

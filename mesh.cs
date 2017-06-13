@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
 
 namespace Template_P3
 {
@@ -10,10 +11,10 @@ namespace Template_P3
     public class Mesh
     {
         // data members
-        public ObjVertex[] vertices;                        // vertex positions, model space
-        public ObjTriangle[] triangles;                     // triangles (3 vertex indices)
-        public ObjQuad[] quads;                             // quads (4 vertex indices)
-        int vertexBufferId, triangleBufferId, quadBufferId; // vertex buffer, triangle buffer, quad buffer
+        public ObjVertex[] vertices;                            // vertex positions, model space
+        public ObjTriangle[] triangles;                         // triangles (3 vertex indices)
+        public ObjQuad[] quads;                                 // quads (4 vertex indices)
+        int vertexBufferId, triangleBufferId, quadBufferId;     // vertex buffer, triangle buffer, quad buffer
         private Texture _texture;
         private Vector3 color;
 
@@ -52,7 +53,7 @@ namespace Template_P3
         }
 
         // render the mesh using the supplied shader and matrix
-        public void Render(Shader shader, Matrix4 toWorld, Matrix4 cameraMatrix)
+        public void Render(Shader shader, Matrix4 toWorld, Matrix4 toScreen, List<Light> lights)
         {
             // on first run, prepare buffers
             Prepare(shader);
@@ -65,27 +66,37 @@ namespace Template_P3
                 GL.ActiveTexture(TextureUnit.Texture0);
                 GL.BindTexture(TextureTarget.Texture2D, _texture.id);
             }
-            int lightCount = 2;
-            float[] lightPositions = new float[3 * lightCount];
-            lightPositions[0] = -7f;
-            lightPositions[1] = -7f;
-            lightPositions[2] = -7f;
+
+            // setup light arrays to pass
+            // TODO pick the closest lights instead of the first ones in the list      
+            /// initialize variables
+            int size = Math.Min(12, 3 * lights.Count);
+            float[] lightPositions = new float[size];
+            float[] lightColors = new float[size];
+            /// fill the arrays
+            int c = 0;
+            for (int i = 0; i < size; i += 3, c++)
+            {
+                lightColors[i    ] = lights[c].color.X;
+                lightColors[i + 1] = lights[c].color.Y;
+                lightColors[i + 2] = lights[c].color.Z;
+                lightPositions[i    ] = lights[c].transform.World.M41;
+                lightPositions[i + 1] = lights[c].transform.World.M42;
+                lightPositions[i + 2] = lights[c].transform.World.M43;
+            }
 
             // enable shader, so variables can be passed to the shader
             GL.UseProgram(shader.programID);
 
-            // pass uniform variabls to 
-            //TODO retrieve this value from sceneGraph
+            // pass the arrays with light related variables
+            GL.Uniform1(shader.uniform_lightcnt, lights.Count);
+            GL.Uniform1(shader.uniform_Alightcol, size, lightColors);
+            GL.Uniform1(shader.uniform_Alightpos, size, lightPositions);
+
+            // pass uniform variablws to shader
             GL.Uniform3(shader.uniform_color, color);
             GL.UniformMatrix4(shader.uniform_toWorld, false, ref toWorld);
-            GL.UniformMatrix4(shader.uniform_mcamera, false, ref cameraMatrix);
-            
-            lightPositions[3] = 5f;
-            lightPositions[4] = 10f;
-            lightPositions[5] = 10f;
-            // pass lightpositions in a float[lightCount * 3], representing vector3's
-            GL.Uniform1(shader.uniform_lights, 3 * lightCount, lightPositions);
-            GL.Uniform1(shader.uniform_lightcount, lightCount);
+            GL.UniformMatrix4(shader.uniform_toScreen, false, ref toScreen);
 
             // bind interleaved vertex data
             GL.EnableClientState(ArrayCap.VertexArray);

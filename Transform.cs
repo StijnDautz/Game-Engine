@@ -2,7 +2,7 @@
 
 namespace Template_P3
 {
-    class Transform
+    public class Transform
     {
         private Matrix4 _model, _toWorld;
 

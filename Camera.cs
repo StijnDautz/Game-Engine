@@ -37,8 +37,7 @@ namespace Template_P3
             /// back and forwards
             transform.TranslateModel(new Vector3(0, 0, 30 * input.ScrollWheel * elapsedTime));
             /// rotation using the mouse
-            if (input.LeftMouseButtonDown)
-            { transform.RotateModel(new Vector3(1, 0, 0), 0.001f * input.MousePos.Y); transform.RotateModel(new Vector3(0, 1, 0), 0.001f * input.MousePos.X); }
+            transform.RotateModel(new Vector3(1, 0, 0), 0.001f * input.MousePos.Y); transform.RotateModel(new Vector3(0, 1, 0), 0.001f * input.MousePos.X);
         }
     }
 }
