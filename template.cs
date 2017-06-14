@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System.Windows.Forms;
 
 namespace Template_P3 {
 
@@ -19,7 +20,8 @@ public class OpenTKApp : GameWindow
 		GL.Enable( EnableCap.Texture2D );
 		GL.Disable( EnableCap.DepthTest );
 		GL.Hint( HintTarget.PerspectiveCorrectionHint, HintMode.Nicest );
-		ClientSize = new Size( 640, 400 );
+        var size = Screen.PrimaryScreen.WorkingArea;
+		ClientSize = new Size( size.Width, size.Height );
 		game = new Game();
 		game.screen = new Surface( Width, Height );
 		Sprite.target = game.screen;
@@ -34,11 +36,11 @@ public class OpenTKApp : GameWindow
 	}
 	protected override void OnResize( EventArgs e )
 	{
-		// called upon window resize
-		GL.Viewport(0, 0, Width, Height);
-		GL.MatrixMode( MatrixMode.Projection );
+        // called upon window resize
+        GL.MatrixMode( MatrixMode.Projection );
 		GL.LoadIdentity();
-		GL.Ortho( -1.0, 1.0, -1.0, 1.0, 0.0, 4.0 );
+        GL.Viewport(0, 0, Width, Height);
+        GL.Ortho( -Width / 2, Width / 2, -Height / 2, Height / 2, 0.0, 0.0 );
 	}
 	protected override void OnUpdateFrame( FrameEventArgs e )
 	{
@@ -90,8 +92,11 @@ public class OpenTKApp : GameWindow
 	{ 
 		// entry point
 		Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo( "en-US" ); // thanks Mathijs
-		using (OpenTKApp app = new OpenTKApp()) { app.Run( 30.0, 0.0 ); }
-	}
-}
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new Form());
+        using (OpenTKApp app = new OpenTKApp()) { app.Run(30.0, 0.0); }
+        }
+    }
 
 } // namespace Template_P3
