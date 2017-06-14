@@ -70,7 +70,6 @@ namespace Template_P3
             // setup light arrays to pass
             // TODO pick the closest lights instead of the first ones in the list      
             /// initialize variables
-            /// TODO make sure max = 4.
             int size = Math.Min(4, lights.Count);
             int vsize = size * 3;
             float[] lightPositions = new float[vsize];
