@@ -26,7 +26,7 @@ namespace Template_P3
         // constructors
         public Mesh(string fileName)
         {
-            MeshLoader loader = new MeshLoader();
+            var loader = new MeshLoader();
             loader.Load(this, "../../" + fileName);
             color = new Vector3(0, 0, 0);
         }
@@ -53,7 +53,7 @@ namespace Template_P3
         }
 
         // render the mesh using the supplied shader and matrix
-        public void Render(Shader shader, Matrix4 toWorld, Matrix4 toScreen, List<Light> lights)
+        public void Render(Shader shader, Matrix4 toWorld, Matrix4 toScreen, Vector3 cameraPos, List<Light> lights)
         {
             // on first run, prepare buffers
             Prepare(shader);
@@ -70,31 +70,37 @@ namespace Template_P3
             // setup light arrays to pass
             // TODO pick the closest lights instead of the first ones in the list      
             /// initialize variables
-            int size = Math.Min(12, 3 * lights.Count);
-            float[] lightPositions = new float[size];
-            float[] lightColors = new float[size];
+            /// TODO make sure max = 4.
+            int size = Math.Min(4, lights.Count);
+            int vsize = size * 3;
+            float[] lightPositions = new float[vsize];
+            float[] lightColors = new float[vsize];
+            float[] lightIntensity = new float[size];
             /// fill the arrays
             int c = 0;
-            for (int i = 0; i < size; i += 3, c++)
+            for (int i = 0; i < vsize; i += 3, c++)
             {
                 lightColors[i    ] = lights[c].color.X;
                 lightColors[i + 1] = lights[c].color.Y;
                 lightColors[i + 2] = lights[c].color.Z;
-                lightPositions[i    ] = lights[c].transform.World.M41;
-                lightPositions[i + 1] = lights[c].transform.World.M42;
-                lightPositions[i + 2] = lights[c].transform.World.M43;
+                lightPositions[i    ] = lights[c].transform.worldPos.X;
+                lightPositions[i + 1] = lights[c].transform.worldPos.Y;
+                lightPositions[i + 2] = lights[c].transform.worldPos.Z;
+                lightIntensity[c] = lights[c].intensity;
             }
 
             // enable shader, so variables can be passed to the shader
             GL.UseProgram(shader.programID);
 
             // pass the arrays with light related variables
-            GL.Uniform1(shader.uniform_lightcnt, lights.Count);
-            GL.Uniform1(shader.uniform_Alightcol, size, lightColors);
-            GL.Uniform1(shader.uniform_Alightpos, size, lightPositions);
+            GL.Uniform1(shader.uniform_lightcnt, size);
+            GL.Uniform1(shader.uniform_Alightcol, vsize, lightColors);
+            GL.Uniform1(shader.uniform_Alightpos, vsize, lightPositions);
+            GL.Uniform1(shader.uniform_Alightintensity, size, lightIntensity);
 
-            // pass uniform variablws to shader
+            // pass uniform variables to shader
             GL.Uniform3(shader.uniform_color, color);
+            GL.Uniform3(shader.uniform_camerapos, cameraPos);
             GL.UniformMatrix4(shader.uniform_toWorld, false, ref toWorld);
             GL.UniformMatrix4(shader.uniform_toScreen, false, ref toScreen);
 

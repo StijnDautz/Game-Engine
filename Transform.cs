@@ -6,9 +6,14 @@ namespace Template_P3
     {
         private Matrix4 _model, _toWorld;
 
-        public Matrix4 World
+        public Matrix4 toWorld
         {
             get { return _model * _toWorld; }
+        }
+
+        public Vector3 worldPos
+        {
+            get { return toWorld.Row3.Xyz; }
         }
         
         public Transform()
@@ -27,7 +32,7 @@ namespace Template_P3
         {
             _model *= Matrix4.CreateTranslation(translation);
         }
-    
+
         // rotate in model space
         public void RotateModel(Vector3 axes, float angle)
         {

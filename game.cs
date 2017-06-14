@@ -57,15 +57,24 @@ namespace Template_P3
             teapot.Mesh.Texture = "assets/wood.jpg";
             floor.Mesh.Texture = "assets/wood.jpg";
             // create camera
-            Camera camera = new Camera();
+            var camera = new Camera();
             camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
             camera.transform.TranslateModel(new Vector3(0, 0, -20));
-            // add lights
-            sceneGraph.Add(new Light());
+            // setup lights
+            var light = new Light();
+            var light2 = new Light();
+            light2.transform.TranslateModel(new Vector3(0, 5, 9));
+            light.transform.TranslateModel(new Vector3(-12, 10, 0));
+            light.color = new Vector3(.9f, .2f, .1f);
+            light2.color = new Vector3(1f);
+            light.intensity = 200f;
+            light2.intensity = 50f;
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             sceneGraph.Add(teapot);
             sceneGraph.Add(camera);
+            sceneGraph.Add(light);
+            sceneGraph.Add(light2);
         }
 
         // tick for background surface

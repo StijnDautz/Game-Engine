@@ -3,14 +3,14 @@ using OpenTK.Input;
 
 namespace Template_P3
 {
-    class Camera : SceneGraphObject
+    public class Camera : SceneGraphObject
     {
         private int _sensitivity;
         public Matrix4 perspective;
 
         public Matrix4 toScreen
         {
-            get { return transform.World * perspective; }
+            get { return transform.toWorld * perspective; }
         }
 
         public Camera()

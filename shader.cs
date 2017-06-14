@@ -8,15 +8,17 @@ namespace Template_P3
     {
         // data members
         public int programID, vsID, fsID;
+        public int uniform_color;
+        public int attribute_vuvs;
         public int attribute_vpos;
         public int attribute_vnrm;
-        public int attribute_vuvs;
-        public int uniform_color;
         public int uniform_toWorld;
         public int uniform_toScreen;
         public int uniform_lightcnt;
+        public int uniform_camerapos;
         public int uniform_Alightpos;
         public int uniform_Alightcol;
+        public int uniform_Alightintensity;
 
         // constructor
         public Shader(String vertexShader, String fragmentShader)
@@ -32,15 +34,17 @@ namespace Template_P3
             Console.WriteLine(GL.GetProgramInfoLog(programID));
 
             // get locations of shader parameters
-            attribute_vpos = GL.GetAttribLocation(programID, "vPosition");
-            attribute_vnrm = GL.GetAttribLocation(programID, "vNormal");
             attribute_vuvs = GL.GetAttribLocation(programID, "vUV");
+            uniform_color = GL.GetUniformLocation(programID, "color");
+            attribute_vnrm = GL.GetAttribLocation(programID, "vNormal");
+            attribute_vpos = GL.GetAttribLocation(programID, "vPosition");
             uniform_toWorld = GL.GetUniformLocation(programID, "toWorld");
             uniform_toScreen = GL.GetUniformLocation(programID, "toScreen");
-            uniform_color = GL.GetUniformLocation(programID, "color");
             uniform_lightcnt = GL.GetUniformLocation(programID, "lightcount");
+            uniform_camerapos = GL.GetUniformLocation(programID, "camerapos");
             uniform_Alightpos = GL.GetUniformLocation(programID, "Alightpos");
             uniform_Alightcol = GL.GetUniformLocation(programID, "Alightcol");
+            uniform_Alightintensity = GL.GetUniformLocation(programID, "Alightintensity");
         }
 
         // loading shaders

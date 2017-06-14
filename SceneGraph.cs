@@ -20,7 +20,7 @@ namespace Template_P3
         {
             foreach(SceneGraphObject o in _children)
             {
-                o.Render(shader, _camera.toScreen, _ligthts);
+                o.Render(shader, _camera, _ligthts);
             }
         }
 
