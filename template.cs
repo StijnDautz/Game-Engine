@@ -20,8 +20,11 @@ public class OpenTKApp : GameWindow
 		GL.Enable( EnableCap.Texture2D );
 		GL.Disable( EnableCap.DepthTest );
 		GL.Hint( HintTarget.PerspectiveCorrectionHint, HintMode.Nicest );
+        // set window to size of screen; start in full screen
         var size = Screen.PrimaryScreen.WorkingArea;
 		ClientSize = new Size( size.Width, size.Height );
+        X = Y = 0;
+        //ClientRectangle = new Rectangle(0, 0, 640, 360);
 		game = new Game();
 		game.screen = new Surface( Width, Height );
 		Sprite.target = game.screen;
@@ -40,7 +43,7 @@ public class OpenTKApp : GameWindow
         GL.MatrixMode( MatrixMode.Projection );
 		GL.LoadIdentity();
         GL.Viewport(0, 0, Width, Height);
-        GL.Ortho( -Width / 2, Width / 2, -Height / 2, Height / 2, 0.0, 0.0 );
+        GL.Ortho(-1, 1, -1, 1, 0, 4);
 	}
 	protected override void OnUpdateFrame( FrameEventArgs e )
 	{
@@ -92,9 +95,6 @@ public class OpenTKApp : GameWindow
 	{ 
 		// entry point
 		Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo( "en-US" ); // thanks Mathijs
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(new Form());
         using (OpenTKApp app = new OpenTKApp()) { app.Run(30.0, 0.0); }
         }
     }
