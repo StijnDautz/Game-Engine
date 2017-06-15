@@ -54,11 +54,11 @@ namespace Template_P3
             floor.setMesh("assets/floor.obj");
             teapot.setMesh("assets/teapot.obj");
             // load a texture
-            teapot.Mesh.Texture = "assets/wood.jpg";
-            floor.Mesh.Texture = "assets/wood.jpg";
+            teapot.Mesh.Texture = "assets/brick1.jpg";
+            floor.Mesh.Texture = "assets/brick1.jpg";
             // load normalmaps
-            teapot.Mesh.NormalMap = "assets/woodNormal.jpg";
-            floor.Mesh.NormalMap = "assets/woodNormal.jpg";
+            teapot.Mesh.NormalMap = "assets/brick1normal.jpg";
+            floor.Mesh.NormalMap = "assets/brick1normal.jpg";
             // create camera
             var camera = new Camera();
             camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
@@ -67,8 +67,8 @@ namespace Template_P3
             var light = new Light();
             var light2 = new Light();
             light2.transform.TranslateModel(new Vector3(0, 5, 9));
-            light.transform.TranslateModel(new Vector3(-12, 10, 0));
-            light.intensity = 200f;
+            light.transform.TranslateModel(new Vector3(7, 10, 0));
+            light.intensity = 50f;
             light2.intensity = 50f;
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);

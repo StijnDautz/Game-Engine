@@ -179,10 +179,14 @@ public class MeshLoader
         vertex.TexCoord = v0.TexCoord;
         vertex.Vertex = v0.Vertex;
         /// compute the edges
-        var v1_v0xyz = v1.Vertex - v0.Vertex; var v1_v0u = v1.TexCoord - v0.TexCoord;
-        var v2_v0xyz = v2.Vertex - v0.Vertex; var v2_v0u = v2.TexCoord - v0.TexCoord;
+        var deltaPos1 = v1.Vertex - v0.Vertex; var deltaUv1 = v1.TexCoord - v0.TexCoord;
+        var deltaPos2 = v2.Vertex - v0.Vertex; var deltaUv2 = v2.TexCoord - v0.TexCoord;
+
+        var r = 1f / (deltaUv1.X * deltaUv2.Y - deltaUv1.Y * deltaUv2.X);
+
+        vertex.Tangent = Vector3.Normalize((deltaPos1 * deltaUv2.Y - deltaPos2 * deltaUv1.Y) * r);
         /// set the tangent of vertex
-        vertex.Tangent = Vector3.Normalize(v1_v0u.X == 0 ? v2_v0xyz / v2_v0u.X : v1_v0xyz / v1_v0u.X);
+        //vertex.Tangent = Vector3.Normalize(v1_v0u.X == 0 ? v2_v0xyz / v2_v0u.X : v1_v0xyz / v1_v0u.X);
         /// return the new vertex with a computed tangent
         return vertex;
     }
