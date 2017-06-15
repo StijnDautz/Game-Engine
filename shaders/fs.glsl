@@ -1,46 +1,50 @@
 ﻿#version 330
  
-// shader input
-in vec2 uv;						// interpolated texture coordinates
-in vec4 normal;					// interpolated normal
-in vec3 worldPos;
-uniform sampler2D pixels;		// texture sampler
-uniform vec3 color;
-uniform vec3 camerapos;
-uniform int lightcount;
-uniform float[12] Alightpos;
-uniform float[12] Alightcol;
-uniform float[4] Alightintensity;
+// input
+in vec2 uv;							// interpolated texture coordinates
+in vec4 normal;						// interpolated normal
+in vec3 worldPos;					// vertex position
+in vec3 cameraPosition;				// camera position
+in vec3[4] lightpositions;			// light positions
+uniform sampler2D pixels;			// texture sampler
+uniform vec3 color;					// material color
+uniform int lightcount;				// total amount of lights to loop through
+uniform float[4] Alightintensity;	// light intensities
+uniform float[12] Alightcol;		// light colors
 
-out vec4 outputColor;
+// output
+out vec4 outputColor;				// color of the pixel
 
 // fragment shader
 void main()
 {
-		int c = 0;
-		for(int i = 0; i < lightcount * 3; i+=3, c++)
-		{
-				// reconstruct vector3 from float[3]
-				vec3 lightpos = vec3(Alightpos[i], Alightpos[i+1], Alightpos[i+2]);
-				vec3 lightcol = vec3(Alightcol[i], Alightcol[i+1], Alightcol[i+2]);
-				
-				// diffuse
-				/// vertexWorldPos to lightPos
-				vec3 L = lightpos - worldPos;
-				float dist = length(L);
-				L = normalize(L);
-				vec3 diffusecolor = color.xyz + texture(pixels, uv).xyz * lightcol;
-				vec3 diffuse = diffusecolor * (max(0.0f, dot(L, normal.xyz)));
-				
-				// ambient
-				vec3 ambient = diffusecolor * 0.12f;
+	// compute color a light cast on the pixel
+	int c = 0;
+	for(int i = 0; i < lightcount * 3; i+=3, c++)
+	{
+			// reconstruct vector3 from float[3]
+			vec4 lightcol = vec4(Alightcol[i], Alightcol[i+1], Alightcol[i+2], 1);
 
-				// specular
-				vec3 specular = diffusecolor * pow(max(0.0f, dot(reflect(-L, normal.xyz), normalize(camerapos - worldPos))), 40f);
+			// phong shading
+			// diffuse
+			/// vertexWorldPos to lightPos
+			vec3 L = lightpositions[c] - worldPos;
+			float dist = length(L);
+			L = normalize(L);
+			vec4 diffusecolor = vec4(color, 1) + texture(pixels, uv) * lightcol;
+			vec4 diffuse = diffusecolor * max(0.0f, dot(L, normal.xyz));
+				
+			// ambient
+			vec4 ambient = diffusecolor * 0.12f;
 
-				// output
-				float attenuation = 1f / (1 + 0.7f * dist * dist);
-				outputColor += vec4(ambient, 1) + attenuation * Alightintensity[c] * vec4(diffuse + specular, 1);
-		}
-		outputColor /= lightcount;
+			// specular
+			vec4 specular = diffusecolor * pow(max(0.0f, dot(reflect(-L, normal.xyz), normalize(cameraPosition - worldPos))), 30f);
+
+			// output
+			/// compute the light attenuation
+			float attenuation = 1f / (1 + 0.7f * dist * dist);
+			///
+			outputColor += ambient + attenuation * Alightintensity[c] * (diffuse + specular);
+	}
+	outputColor /= lightcount;
 }

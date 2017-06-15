@@ -12,6 +12,7 @@ namespace Template_P3
         public int attribute_vuvs;
         public int attribute_vpos;
         public int attribute_vnrm;
+        public int attribute_tang;
         public int uniform_toWorld;
         public int uniform_toScreen;
         public int uniform_lightcnt;
@@ -19,6 +20,7 @@ namespace Template_P3
         public int uniform_Alightpos;
         public int uniform_Alightcol;
         public int uniform_Alightintensity;
+        public int uniform_normalMap;
 
         // constructor
         public Shader(String vertexShader, String fragmentShader)
@@ -37,6 +39,7 @@ namespace Template_P3
             attribute_vuvs = GL.GetAttribLocation(programID, "vUV");
             uniform_color = GL.GetUniformLocation(programID, "color");
             attribute_vnrm = GL.GetAttribLocation(programID, "vNormal");
+            attribute_tang = GL.GetAttribLocation(programID, "vTangent");
             attribute_vpos = GL.GetAttribLocation(programID, "vPosition");
             uniform_toWorld = GL.GetUniformLocation(programID, "toWorld");
             uniform_toScreen = GL.GetUniformLocation(programID, "toScreen");
@@ -45,6 +48,7 @@ namespace Template_P3
             uniform_Alightpos = GL.GetUniformLocation(programID, "Alightpos");
             uniform_Alightcol = GL.GetUniformLocation(programID, "Alightcol");
             uniform_Alightintensity = GL.GetUniformLocation(programID, "Alightintensity");
+            uniform_normalMap = GL.GetUniformLocation(programID, "normalMap");
         }
 
         // loading shaders

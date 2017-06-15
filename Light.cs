@@ -9,6 +9,7 @@ namespace Template_P3
 
         public Light()
         {
+            color = new Vector3(1);
             visible = false;
         }
     }

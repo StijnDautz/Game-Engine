@@ -36,7 +36,7 @@ public class MeshLoader
         vertices = new List<Vector3>();
         normals = new List<Vector3>();
         texCoords = new List<Vector2>();
-         objVertices = new List<Mesh.ObjVertex>();
+        objVertices = new List<Mesh.ObjVertex>();
         objTriangles = new List<Mesh.ObjTriangle>();
         objQuads = new List<Mesh.ObjQuad>();
         string line;
@@ -74,6 +74,8 @@ public class MeshLoader
                         objTriangle.Index0 = ParseFaceParameter( parameters[1] );
                         objTriangle.Index1 = ParseFaceParameter( parameters[2] );
                         objTriangle.Index2 = ParseFaceParameter( parameters[3] );
+                        /// set the tangent vectors of the vertices of the triangle
+                        setTriangleTangents(objTriangle);
                         objTriangles.Add( objTriangle );
                         break;
                     case 5:
@@ -82,6 +84,8 @@ public class MeshLoader
                         objQuad.Index1 = ParseFaceParameter( parameters[2] );
                         objQuad.Index2 = ParseFaceParameter( parameters[3] );
                         objQuad.Index3 = ParseFaceParameter( parameters[4] );
+                        /// set the tangent vectors of the vertices of the quad
+                        setQuadTangents(objQuad);
                         objQuads.Add( objQuad );
                         break;
                 }
@@ -136,6 +140,52 @@ public class MeshLoader
 		objVertices.Add( newObjVertex );
 		return objVertices.Count - 1;
     }
-}
+
+    private void setTriangleTangents(Mesh.ObjTriangle triangle)
+    {
+        // create a triangle with vertices with a tangent vector
+        /// get vertices
+        var vertex0 = objVertices[triangle.Index0];
+        var vertex1 = objVertices[triangle.Index1];
+        var vertex2 = objVertices[triangle.Index2];
+        /// set the tangent vector for each vertex
+        objVertices[triangle.Index0] = ComputeVertexWithTangent(vertex0, vertex1, vertex2);
+        objVertices[triangle.Index1] = ComputeVertexWithTangent(vertex1, vertex0, vertex2);
+        objVertices[triangle.Index2] = ComputeVertexWithTangent(vertex2, vertex0, vertex1);
+    }
+
+    private void setQuadTangents(Mesh.ObjQuad quad)
+        {
+            // create a quad with vertices with a tangent vector
+            /// get vertices
+            var vertex0 = objVertices[quad.Index0];
+            var vertex1 = objVertices[quad.Index1];
+            var vertex2 = objVertices[quad.Index2];
+            var vertex3 = objVertices[quad.Index3];
+            /// set the tangent vector for each vertex
+            objVertices[quad.Index0] = ComputeVertexWithTangent(vertex0, vertex1, vertex3);
+            objVertices[quad.Index1] = ComputeVertexWithTangent(vertex1, vertex0, vertex2);
+            objVertices[quad.Index2] = ComputeVertexWithTangent(vertex2, vertex1, vertex3);
+            objVertices[quad.Index3] = ComputeVertexWithTangent(vertex3, vertex2, vertex0);
+        }
+
+    private Mesh.ObjVertex ComputeVertexWithTangent(Mesh.ObjVertex v0, Mesh.ObjVertex v1, Mesh.ObjVertex v2)
+    {
+        // create a new objVertex of v0, but with a tangent vector
+        /// create new objVertex
+        var vertex = new Mesh.ObjVertex();
+        /// set its values again
+        vertex.Normal = v0.Normal;
+        vertex.TexCoord = v0.TexCoord;
+        vertex.Vertex = v0.Vertex;
+        /// compute the edges
+        var v1_v0xyz = v1.Vertex - v0.Vertex; var v1_v0u = v1.TexCoord - v0.TexCoord;
+        var v2_v0xyz = v2.Vertex - v0.Vertex; var v2_v0u = v2.TexCoord - v0.TexCoord;
+        /// set the tangent of vertex
+        vertex.Tangent = Vector3.Normalize(v1_v0u.X == 0 ? v2_v0xyz / v2_v0u.X : v1_v0xyz / v1_v0u.X);
+        /// return the new vertex with a computed tangent
+        return vertex;
+    }
+    }
 
 } // namespace Template_P3
