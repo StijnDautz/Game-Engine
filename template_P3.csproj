@@ -74,6 +74,7 @@
     <Compile Include="game.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Light.cs" />
+    <Compile Include="Material.cs" />
     <Compile Include="mesh.cs" />
     <Compile Include="meshLoader.cs" />
     <Compile Include="quad.cs" />

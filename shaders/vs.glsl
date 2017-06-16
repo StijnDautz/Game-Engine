@@ -12,16 +12,21 @@ uniform float[12] Alightpos;	// light positions in world space
 uniform int lightcount;			// light count
 
 // output
-// out vec4 normal;				// transformed vertex normal
 out vec2 uv;					// uv texture coordinates
-out vec3 worldPos;				// vertex position
-out vec3 cameraPosition;		// camera position
-out vec3[4] lightpositions;		// light positions
+out vec3 toCamera;				// intersection to camera
+out vec3[4] toLight;			// intersection to light
 
 // vertex shader
 void main()
-{
-	// transfrom objects to world space and pass them to the fragment shader
+{	
+	// ----------------------- general ------------------------
+	/// pass uv to the fragment shader
+	uv = vUV;
+
+	// compute the pixel on the screen to draw to
+	gl_Position = toScreen * vec4(vPosition, 1.0);
+
+	// -------------------- toTangentSpace ---------------------
 	/// tangent
 	vec3 tangent = normalize(vec3(toWorld * vec4(vTangent, 0)).xyz);
 
@@ -33,23 +38,17 @@ void main()
 
 	mat3 toTangentSpace = transpose(mat3(tangent, bitangent, normal));
 
-	/// vertex
-	worldPos = (toWorld * vec4(vPosition, 0)).xyz * toTangentSpace;
+	// --------------- toLight and toCamera -------------------
+	vec3 worldPos = (toWorld * vec4(vPosition, 0)).xyz * toTangentSpace;
 
 	/// pass cameraposition to the fragment shader
-	cameraPosition = camerapos * toTangentSpace;
+	toCamera = normalize(camerapos * toTangentSpace - worldPos);
 
 	/// lights
 	int c = 0;
 	for(int i = 0; i < lightcount * 3; i+=3, c++)
 	{
-			// reconstruct vector3 from float[3]
-			lightpositions[c] = vec3(Alightpos[i], Alightpos[i+1], Alightpos[i+2]) * toTangentSpace;
+		// reconstruct vector3 from float[3]
+		toLight[c] = vec3(Alightpos[i], Alightpos[i+1], Alightpos[i+2]) * toTangentSpace - worldPos;
 	}	
-
-	// pass uv to the fragment shader
-	uv = vUV;
-
-	// compute the pixel on the screen to draw to
-	gl_Position = toScreen * vec4(vPosition, 1.0);
 }

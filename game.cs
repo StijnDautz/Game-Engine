@@ -53,12 +53,13 @@ namespace Template_P3
             // load meshes and add them to actors
             floor.setMesh("assets/meshes/floor.obj");
             teapot.setMesh("assets/meshes/floor.obj");
-            // load a texture
-            teapot.Mesh.Texture = "assets/plain.png";
-            floor.Mesh.Texture = "assets/plain.png";
-            // load normalmaps
-            teapot.Mesh.NormalMap = "assets/rustyiron1normal.jpg";
-            floor.Mesh.NormalMap = "assets/lowpolyrocks_normal.jpg";
+            // create material
+            var material = new Material();
+            material.diffuseTexture = Material.GetTexture("assets/plain.png");
+            material.normalTexture = Material.GetTexture("assets/lowpolyrocks_normal.jpg");
+            // set material
+            floor.Mesh.material = material;
+            teapot.Mesh.material = material;
             // create camera
             var camera = new Camera();
             camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);

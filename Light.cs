@@ -17,9 +17,6 @@ namespace Template_P3
             // TODO interpolate normals
             color = new Vector3(1, 1, 0.95f);
             visible = false;
-            setMesh("assets/meshes/lightbulb.obj");
-            Mesh.Texture = "assets/plain.png";
-            Mesh.NormalMap = "assets/plain.png"; 
         }
 
         public override void OnRenderFrame(float elapsedTime)

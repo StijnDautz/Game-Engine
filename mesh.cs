@@ -15,18 +15,7 @@ namespace Template_P3
         public ObjTriangle[] triangles;                         // triangles (3 vertex indices)
         public ObjQuad[] quads;                                 // quads (4 vertex indices)
         int vertexBufferId, triangleBufferId, quadBufferId;     // vertex buffer, triangle buffer, quad buffer
-        private Texture _texture, _normalMap;
-        private Vector3 color;
-
-        public string Texture
-        {
-            set { _texture = new Texture("../../" + value); }
-        }
-
-        public string NormalMap
-        {
-            set { _normalMap = new Texture("../../" + value); }
-        }
+        public Material material;
 
         // constructors
         //TODO improve setting normal map routine
@@ -34,7 +23,6 @@ namespace Template_P3
         {
             var loader = new MeshLoader();
             loader.Load(this, "../../" + fileName);
-            color = new Vector3(0, 0, 0);
         }
 
         // initialization; called during first render
@@ -85,38 +73,25 @@ namespace Template_P3
                 lightIntensity[c] = lights[c].intensity;
             }
 
-            // enable shader, so variables can be passed to the shader
+            // pass variables to shader
             GL.UseProgram(shader.programID);
 
-            // enable texture if it is not null
-            // TODO change normal mapping system
-            // TODO add materials with components?
-            if (_texture != null)
-            {
-                int diffuse = GL.GetUniformLocation(shader.programID, "pixels");
-                int normal = GL.GetUniformLocation(shader.programID, "normalMap");
-                GL.Uniform1(diffuse, 0);
-                GL.Uniform1(normal, 1);
-
-                GL.ActiveTexture(TextureUnit.Texture0);
-                GL.BindTexture(TextureTarget.Texture2D, _texture.id);
-                GL.ActiveTexture(TextureUnit.Texture1);
-                GL.BindTexture(TextureTarget.Texture2D, _normalMap.id);
-            }
-
-            // pass the arrays with light related variables
+            /// pass the arrays with light related variables
             GL.Uniform1(shader.uniform_lightcnt, size);
             GL.Uniform1(shader.uniform_Alightcol, vsize, lightColors);
             GL.Uniform1(shader.uniform_Alightpos, vsize, lightPositions);
             GL.Uniform1(shader.uniform_Alightintensity, size, lightIntensity);
 
-            // pass uniform variables to shader
-            GL.Uniform3(shader.uniform_color, color);
+            /// pass world variables to shader
             GL.Uniform3(shader.uniform_camerapos, cameraPos);
             GL.UniformMatrix4(shader.uniform_toWorld, false, ref toWorld);
             GL.UniformMatrix4(shader.uniform_toScreen, false, ref toScreen);
 
+            /// pass materials variabels to shader
+            material.PassVarsToShader(shader);
+
             int vertexsize = Marshal.SizeOf(typeof(ObjVertex));
+
             // bind interleaved vertex data
             GL.EnableClientState(ArrayCap.VertexArray);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferId);
