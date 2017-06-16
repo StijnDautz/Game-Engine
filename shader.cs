@@ -48,7 +48,7 @@ namespace Template_P3
             uniform_Alightpos = GL.GetUniformLocation(programID, "Alightpos");
             uniform_Alightcol = GL.GetUniformLocation(programID, "Alightcol");
             uniform_Alightintensity = GL.GetUniformLocation(programID, "Alightintensity");
-            uniform_normalMap = GL.GetUniformLocation(programID, "normalMap");
+            //uniform_normalMap = GL.GetUniformLocation(programID, "normalMap");
         }
 
         // loading shaders

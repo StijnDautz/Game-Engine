@@ -17,40 +17,34 @@ out vec2 uv;					// uv texture coordinates
 out vec3 worldPos;				// vertex position
 out vec3 cameraPosition;		// camera position
 out vec3[4] lightpositions;		// light positions
-out vec3 tangent;				// normalized tangent vector
 
 // vertex shader
 void main()
 {
 	// transfrom objects to world space and pass them to the fragment shader
-
 	/// tangent
-	tangent = normalize(vec3(toWorld * vec4(vTangent, 0)).xyz);
+	vec3 tangent = normalize(vec3(toWorld * vec4(vTangent, 0)).xyz);
 
 	/// normal
-	vec3 normal = normalize(vec3(toWorld * vec4( vNormal, 0.0f )).xyz);
+	vec3 normal = normalize(vec3(toWorld * vec4( vNormal, 0)).xyz);
 
 	/// bitangent
-	vec3 bitangent = normalize(cross(normal, tangent));
+	vec3 bitangent = normalize(cross(tangent, normal));
 
-	mat3 tangentSpace = mat3
-					( tangent.x, tangent.y, tangent.z,
-					bitangent.x, bitangent.y, bitangent.z,
-					normal.x, normal.y, normal.z );
+	mat3 toTangentSpace = transpose(mat3(tangent, bitangent, normal));
 
 	/// vertex
-	worldPos = (toWorld * vec4(vPosition, 0)).xyz * tangentSpace;
-
+	worldPos = (toWorld * vec4(vPosition, 0)).xyz * toTangentSpace;
 
 	/// pass cameraposition to the fragment shader
-	cameraPosition = camerapos * tangentSpace;
+	cameraPosition = camerapos * toTangentSpace;
 
 	/// lights
 	int c = 0;
 	for(int i = 0; i < lightcount * 3; i+=3, c++)
 	{
 			// reconstruct vector3 from float[3]
-			lightpositions[c] = tangentSpace * vec3(Alightpos[i], Alightpos[i+1], Alightpos[i+2]);
+			lightpositions[c] = vec3(Alightpos[i], Alightpos[i+1], Alightpos[i+2]) * toTangentSpace;
 	}	
 
 	// pass uv to the fragment shader

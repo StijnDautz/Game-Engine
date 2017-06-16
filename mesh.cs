@@ -64,21 +64,6 @@ namespace Template_P3
             // on first run, prepare buffers
             Prepare(shader);
 
-            // enable texture if it is not null
-            if (_texture != null)
-            {
-                int texLoc = GL.GetUniformLocation(shader.programID, "pixels");
-                GL.Uniform1(texLoc, 0);
-                GL.ActiveTexture(TextureUnit.Texture0);
-                GL.BindTexture(TextureTarget.Texture2D, _texture.id);
-            }
-            if(_normalMap != null)
-            {
-                GL.Uniform1(shader.uniform_normalMap, 1);
-                GL.ActiveTexture(TextureUnit.Texture1);
-                GL.BindTexture(TextureTarget.Texture2D, _texture.id);
-            }
-
             // setup light arrays to pass
             // TODO pick the closest lights instead of the first ones in the list      
             /// initialize variables
@@ -102,6 +87,22 @@ namespace Template_P3
 
             // enable shader, so variables can be passed to the shader
             GL.UseProgram(shader.programID);
+
+            // enable texture if it is not null
+            // TODO change normal mapping system
+            // TODO add materials with components?
+            if (_texture != null)
+            {
+                int diffuse = GL.GetUniformLocation(shader.programID, "pixels");
+                int normal = GL.GetUniformLocation(shader.programID, "normalMap");
+                GL.Uniform1(diffuse, 0);
+                GL.Uniform1(normal, 1);
+
+                GL.ActiveTexture(TextureUnit.Texture0);
+                GL.BindTexture(TextureTarget.Texture2D, _texture.id);
+                GL.ActiveTexture(TextureUnit.Texture1);
+                GL.BindTexture(TextureTarget.Texture2D, _normalMap.id);
+            }
 
             // pass the arrays with light related variables
             GL.Uniform1(shader.uniform_lightcnt, size);
@@ -156,6 +157,7 @@ namespace Template_P3
             public Vector3 Normal;
             public Vector3 Vertex;
             public Vector3 Tangent;
+            public Vector3 BiTangent;
         }
 
         // layout of a single triangle

@@ -51,14 +51,14 @@ namespace Template_P3
             floor = new SceneGraphObject();
             teapot = new SceneGraphObject();
             // load meshes and add them to actors
-            floor.setMesh("assets/floor.obj");
-            teapot.setMesh("assets/teapot.obj");
+            floor.setMesh("assets/meshes/floor.obj");
+            teapot.setMesh("assets/meshes/floor.obj");
             // load a texture
-            teapot.Mesh.Texture = "assets/brick1.jpg";
-            floor.Mesh.Texture = "assets/brick1.jpg";
+            teapot.Mesh.Texture = "assets/plain.png";
+            floor.Mesh.Texture = "assets/plain.png";
             // load normalmaps
-            teapot.Mesh.NormalMap = "assets/brick1normal.jpg";
-            floor.Mesh.NormalMap = "assets/brick1normal.jpg";
+            teapot.Mesh.NormalMap = "assets/rustyiron1normal.jpg";
+            floor.Mesh.NormalMap = "assets/lowpolyrocks_normal.jpg";
             // create camera
             var camera = new Camera();
             camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
@@ -66,13 +66,14 @@ namespace Template_P3
             // setup lights
             var light = new Light();
             var light2 = new Light();
-            light2.transform.TranslateModel(new Vector3(0, 5, 9));
-            light.transform.TranslateModel(new Vector3(7, 10, 0));
+            light2.transform.TranslateModel(new Vector3(4, 8, 0));
+            light.transform.TranslateModel(new Vector3(-4, 8, 0));
             light.intensity = 50f;
             light2.intensity = 50f;
+            light.color = new Vector3(1, 0.6f, 1);
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
-            sceneGraph.Add(teapot);
+            //sceneGraph.Add(teapot);
             sceneGraph.Add(camera);
             sceneGraph.Add(light);
             sceneGraph.Add(light2);
@@ -82,7 +83,6 @@ namespace Template_P3
         public void OnRenderFrame()
         {
             screen.Clear(0);
-            screen.Print("hello world", 2, 2, 0xffff00);
 
             //update inputManager
             inputManager.Update();
