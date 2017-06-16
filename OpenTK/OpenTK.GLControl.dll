@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" class="static " data-root="/">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+    
+        <meta property="fb:app_id" content="235682883225736" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@nuget">
+
+    <meta property="og:title" content="OpenTK.GLControl" />
+    <meta property="og:type" content="nugetgallery:package" />
+    <meta property="og:url" content="https://nuget.org/packages/OpenTK.GLControl/" />
+    <meta property="og:description" content="OpenTK.GLControl is a Windows.Forms Control with OpenGL rendering capabilities. Use it to add
+					accelerated 3d graphics to your Windows.Forms or Windows Presentation Foundation (WPF) application.
+
+					Features
+					- Integrate 3d graphics into your Windows.Forms or WPF application
+					- Use the .Net/Mono language of your choice: C#, F#, VB.Net, Boo, IronPython, IronRuby
+					- Develop faster with inline documentation and strongly-typed enumerations for all OpenGL and OpenAL functions
+
+					This is the official nuget package from http://www.opentk.com
+					The source code can be found at https://github.com/opentk/opentk
+					This package contains all code up to Feb 2016 from https://github.com/ppy/opentk" />
+    <meta property="og:determiner" content="a"/>
+    <meta property="og:image" content="http://www.duckinegg.com/OpenTK.png"/>
+
+
+        
+    
+
+
+
+        <title>
+            NuGet Gallery
+            | OpenTK.GLControl 1.1.2225</title>
+
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <link title="NuGet.org" type="application/opensearchdescription+xml" href="/opensearch.xml" rel="search">
+
+        <link href="/Content/css?v=ijm2imQvNSFKhSRFQP5zkdf3HyLm9DhCis217FUd--o1" rel="stylesheet"/>
+
+        <link href="/Content/font-awesome/css?v=wd5DfaIqnHRUabnWFEulonklM7qt2Vym0q5CoLo5Qbg1" rel="stylesheet"/>
+
+        <!--[if IE 7]>
+        <link href="/Content/font-awesome-ie7.min.css" rel="stylesheet"/>
+
+        <![endif]-->
+
+        
+
+        <script src="/Scripts/modernizr?v=byG8dOZWsVDn1dZ9Dz1vs9imzMfHoSev0enqgT4Wvhw1"></script>
+
+            <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-100515088-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+        
+        
+                <!-- Telemetry -->
+        <script type="text/javascript">
+            var appInsights = window.appInsights || function (config) {
+                function s(config) {
+                    t[config] = function () {
+                        var i = arguments;
+                        t.queue.push(function () { t[config].apply(t, i) })
+                    }
+                }
+
+                var t = { config: config }, r = document, f = window, e = "script", o = r.createElement(e), i, u;
+                for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) s("track" + i.pop());
+                return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) {
+                    var s = u && u(config, r, f, e, o);
+                    return s !== !0 && t["_" + i](config, r, f, e, o), s
+                }), t
+            }({
+                instrumentationKey: 'df3a36b9-dfba-401c-82ab-35690083be3e',
+                samplingPercentage: 100
+            });
+
+            window.appInsights = appInsights;
+            appInsights.trackPageView();
+        </script>
+
+    </head>
+    <body class="s-noclickonce">
+
+        <div id="outer-wrapper">
+            <div id="content-wrapper">
+                <header class="main">
+                    <div id="logo"><a href="/">NuGet Gallery</a></div>
+                    <div id="header-sidebox">
+                        <div id="searchBox" role="search">
+                            <form action="/packages" method="get">
+                                <input name="q" id="searchBoxInput" class="expanding-search" placeholder="Search Packages" value="" autocomplete="off"  />
+                                <input id="searchBoxSubmit" type="submit" value="Submit" />
+                            </form>
+                        </div>
+                        <div class="user-display">
+        <span class="welcome">
+            <a href="/users/account/LogOn?returnUrl=%2Fpackages%2FOpenTK.GLControl%2F1.1.2225" title="Register for an account or sign in with an existing account">Register / Sign in</a>
+        </span>
+</div>
+                    </div>
+                </header>
+                <nav class="main">
+                    <ul id="menu" class="expanding-search">
+
+    <li><a href="/">Home</a></li>
+    <li class="current"><a href="/packages">Packages</a></li>
+    <li><a href="/packages/manage/upload" class="upload">Upload Package</a></li>
+        <li><a href="/stats">Statistics</a></li>
+        <li><a href="https://docs.nuget.org">Documentation</a></li>
+    <li><a href="/downloads">Downloads</a></li>
+    <li><a href="http://blog.nuget.org">Blog</a></li>
+</ul>
+                </nav>
+                <div id="body" role="main">
+                    
+
+
+<div id="sideColumn">
+    
+    <img class="logo" src="http://www.duckinegg.com/OpenTK.png" alt="Icon for package OpenTK.GLControl" onerror="this.src = 'https://nuget.org/Content/Images/packageDefaultIcon.png';" />
+    <div id="stats">
+        <div class="stat">
+            <p class="stat-number">51.555</p>
+            <p class="stat-label">Downloads</p>
+        </div>
+        <div class="stat">
+            <p class="stat-number">20.752</p>
+            <p class="stat-label">Downloads of v 1.1.2225</p>
+        </div>
+        <div class="stat">
+            <p class="stat-number" title="51.555 downloads in 1387 days">37</p>
+            <p class="stat-label">Average downloads per day</p>
+        </div>
+        <div class="stat">
+            <p class="stat-number">2016-02-04</p>
+            <p class="stat-label">Last published</p>
+        </div>
+    </div>
+    <nav>
+        <ul>
+                <li>
+                    <a href="http://www.opentk.com/" title="Visit the project site to learn more about this package" rel="nofollow">
+                        Project Site
+                    </a>
+                </li>
+                            <li><a href="http://www.opentk.com/project/license" title="Make sure you agree with the license" rel="nofollow">License</a></li>
+            <li><a href="/packages/OpenTK.GLControl/1.1.2225/ContactOwners" title="Ask the package owners a question">Contact Owners</a></li>
+                <li>
+                    <a href="/packages/OpenTK.GLControl/1.1.2225/ReportAbuse" title="Report the package as abusive">
+                        Report Abuse
+                    </a>
+                </li>
+
+                <li><a href="https://www.nuget.org/api/v2/package/OpenTK.GLControl/1.1.2225" title="Download the raw nupkg file." rel="nofollow">Download</a> <a href="/packages/OpenTK.GLControl/1.1.2225/Download" title="How do I download?">(how-to)</a></li>
+                <li><a class="s-clickonce" href="https://npe.codeplex.com/releases/clickonce/NuGetPackageExplorer.application?url=https://www.nuget.org/api/v2/package/OpenTK.GLControl/1.1.2225/&amp;id=OpenTK.GLControl&amp;version=1.1.2225" title="Explore the nupkg with the NuGet Package Explorer (IE only)" rel="nofollow">Open in Package Explorer</a></li>
+
+                                        <li><a href="/stats/packages/OpenTK.GLControl?groupby=Version" title="Package Statistics">Package Statistics</a></li>
+        </ul>
+    </nav>
+
+    <div class="stat">
+        <ul class="share-buttons">
+
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://nuget.org/packages/OpenTK.GLControl/&t=Check+out+OpenTK.GLControl+on+%23NuGet." target="_blank" title="Share on Facebook"><i class="icon-facebook"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?url=https://nuget.org/packages/OpenTK.GLControl/&text=Check+out+OpenTK.GLControl+on+%23NuGet." target="_blank" title="Tweet this package"><i class="icon-twitter"></i></a></li>
+        </ul>
+        <p class="stat-label">Share on Social Networks</p>
+    </div>
+
+
+    
+
+
+</div>
+<div id="mainColumn" role="main">
+    
+<div class="package-page">
+                
+
+
+
+    <div class="package-page-heading">
+        <h1 title="OpenTK.GLControl">OpenTK.GLControl</h1>
+        <h2>1.1.2225</h2>
+    </div>
+        <p>OpenTK.GLControl is a Windows.Forms Control with OpenGL rendering capabilities. Use it to add</p>
+        <p>					accelerated 3d graphics to your Windows.Forms or Windows Presentation Foundation (WPF) application.</p>
+        <p></p>
+        <p>					Features</p>
+        <p>					- Integrate 3d graphics into your Windows.Forms or WPF application</p>
+        <p>					- Use the .Net/Mono language of your choice: C#, F#, VB.Net, Boo, IronPython, IronRuby</p>
+        <p>					- Develop faster with inline documentation and strongly-typed enumerations for all OpenGL and OpenAL functions</p>
+        <p></p>
+        <p>					This is the official nuget package from http://www.opentk.com</p>
+        <p>					The source code can be found at https://github.com/opentk/opentk</p>
+        <p>					This package contains all code up to Feb 2016 from https://github.com/ppy/opentk</p>
+
+
+        <p>
+            To install OpenTK.GLControl, run the following command in the <a href="https://docs.nuget.org/docs/start-here/using-the-package-manager-console">
+                Package Manager Console
+            </a>
+        </p>
+        <div class="nuget-badge">
+            <p>
+                <code>
+                    Install-Package OpenTK.GLControl
+                         -Version 1.1.2225
+                                    </code>
+            </p>
+        </div>
+
+        <h3>Release Notes</h3>
+        <p>http://www.opentk.com/news</p>
+
+    <h3>Owners</h3>
+        <ul class="owners">
+            <li>
+                    <a class="owner" href="/profiles/exDreamDuck" title="exDreamDuck">
+<img src="https://secure.gravatar.com/avatar/245a71c3f082abbeaece0d14affa28f2?s=32&amp;r=g&amp;d=retro" class="owner-image" height="32" title="exDreamDuck" width="32" alt="gravatar" />                    <span class="owner-name">exDreamDuck</span>
+    </a>
+
+            </li>
+            <li>
+                    <a class="owner" href="/profiles/varon" title="varon">
+<img src="https://secure.gravatar.com/avatar/d74bf8562799da6b29e3e576ed992282?s=32&amp;r=g&amp;d=retro" class="owner-image" height="32" title="varon" width="32" alt="gravatar" />                    <span class="owner-name">varon</span>
+    </a>
+
+            </li>
+    </ul>
+
+    <div title="These authors' works form part of the package or its contents">
+        <h3>Authors</h3>
+        <p class="authors">
+            The Open Toolkit Team
+        </p>
+    </div>
+        <h3>Copyright</h3>
+        <p>Copyright 2006-2013 Stefanos Apostolopoulos</p>
+            <h3>Tags</h3>
+        <ul class="tags">
+                <li><a href="/packages?q=Tags%3A%22OpenTK%22" title="Search for OpenTK">OpenTK</a></li>
+                <li><a href="/packages?q=Tags%3A%22OpenGL%22" title="Search for OpenGL">OpenGL</a></li>
+                <li><a href="/packages?q=Tags%3A%22WinForms%22" title="Search for WinForms">WinForms</a></li>
+                <li><a href="/packages?q=Tags%3A%22WPF%22" title="Search for WPF">WPF</a></li>
+                <li><a href="/packages?q=Tags%3A%22C%23%22" title="Search for C#">C#</a></li>
+                <li><a href="/packages?q=Tags%3A%22F%23%22" title="Search for F#">F#</a></li>
+                <li><a href="/packages?q=Tags%3A%22VB%22" title="Search for VB">VB</a></li>
+                <li><a href="/packages?q=Tags%3A%22.Net%22" title="Search for .Net">.Net</a></li>
+                <li><a href="/packages?q=Tags%3A%22Mono%22" title="Search for Mono">Mono</a></li>
+        </ul>
+            <h3>Dependencies</h3>
+    <ul id="dependencySets">
+            <li>
+                <ul class="dependencySet">
+                        <li>
+                                <a href="/packages/OpenTK/">OpenTK</a>
+                                <span>(&gt;= 1.1.2225)</span>
+                        </li>
+                </ul>
+            </li>
+    </ul>
+    <h3>Version History</h3>
+    <table class="sexy-table">
+        <thead>
+            <tr>
+                <th class="first">
+                    Version
+                </th>
+                <th>
+                    Downloads
+                </th>
+                <th class="last">
+                    Last updated
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 3.0.0-pre" href="/packages/OpenTK.GLControl/3.0.0-pre ">
+                                    OpenTK.GLControl
+                                    3.0.0-pre
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            324
+                        </td>
+                        <td>
+                            <span title="2017-05-08T20:56:47.3600000">maandag 8 mei 2017</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.2349.61993" href="/packages/OpenTK.GLControl/1.1.2349.61993 ">
+                                    OpenTK.GLControl
+                                    1.1.2349.61993
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            15.894
+                        </td>
+                        <td>
+                            <span title="2016-06-07T22:55:38.2000000">dinsdag 7 juni 2016</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a href="/packages/OpenTK.GLControl/1.1.2225" title="OpenTK.GLControl 1.1.2225 (this version)">
+                                    OpenTK.GLControl 1.1.2225 (this version)
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            20.752
+                        </td>
+                        <td>
+                            <span title="2016-02-04T08:00:25.1930000">donderdag 4 februari 2016</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1589.5942" href="/packages/OpenTK.GLControl/1.1.1589.5942 ">
+                                    OpenTK.GLControl
+                                    1.1.1589.5942
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            11.471
+                        </td>
+                        <td>
+                            <span title="2014-07-29T16:35:02.8930000">dinsdag 29 juli 2014</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1589.5941" href="/packages/OpenTK.GLControl/1.1.1589.5941 ">
+                                    OpenTK.GLControl
+                                    1.1.1589.5941
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            683
+                        </td>
+                        <td>
+                            <span title="2014-05-09T15:23:05.3470000">vrijdag 9 mei 2014</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1579.5793" href="/packages/OpenTK.GLControl/1.1.1579.5793 ">
+                                    OpenTK.GLControl
+                                    1.1.1579.5793
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            190
+                        </td>
+                        <td>
+                            <span title="2014-04-29T16:03:52.1500000">dinsdag 29 april 2014</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1508.5725" href="/packages/OpenTK.GLControl/1.1.1508.5725 ">
+                                    OpenTK.GLControl
+                                    1.1.1508.5725
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            174
+                        </td>
+                        <td>
+                            <span title="2014-05-09T14:57:47.7100000">vrijdag 9 mei 2014</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1508.5724" href="/packages/OpenTK.GLControl/1.1.1508.5724 ">
+                                    OpenTK.GLControl
+                                    1.1.1508.5724
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            849
+                        </td>
+                        <td>
+                            <span title="2014-02-17T19:02:08.6070000">maandag 17 februari 2014</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1456.5398" href="/packages/OpenTK.GLControl/1.1.1456.5398 ">
+                                    OpenTK.GLControl
+                                    1.1.1456.5398
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            591
+                        </td>
+                        <td>
+                            <span title="2013-12-27T03:42:27.6970000">vrijdag 27 december 2013</span>
+                        </td>
+                    </tr>
+                    <tr class="versionTableRow">
+                        <td class="version">
+                                <a title="OpenTK.GLControl 1.1.1161.61462" href="/packages/OpenTK.GLControl/1.1.1161.61462 ">
+                                    OpenTK.GLControl
+                                    1.1.1161.61462
+                                </a>
+                        </td>
+                        <td class="package-version-downloads">
+                            627
+                        </td>
+                        <td>
+                            <span title="2013-08-28T08:19:35.9230000">woensdag 28 augustus 2013</span>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<div class="clear-fix"><!--Sad Panda--></div>
+
+
+                </div>
+            </div>
+            <div id="layout-footer" class="group">
+                <footer id="footer">
+                    <ul class="recommended">
+    <li>
+        <a href="/policies/Contact">Contact Us</a>
+        <p>Got questions about NuGet or the NuGet Gallery?</p>
+    </li>
+    <li>
+        <a href="https://docs.nuget.org/docs/start-here/overview">Overview</a>
+        <p>NuGet is a Visual Studio extension that makes it easy to add, remove, and update libraries and...</p>
+    </li>
+    <li>
+        <a href="https://docs.nuget.org/docs/start-here/installing-nuget">Install</a>
+        <p>NuGet can be installed and updated using the Visual Studio Extension Manager. To check if your copy...</p>
+    </li>
+    <li>
+        <a href="https://docs.nuget.org/docs/start-here/videos">Videos</a>
+        <p>Watch screencasts and presentations about anything and everything NuGet.</p>
+    </li>
+    <li>
+        <a href="https://docs.nuget.org/docs/start-here/nuget-faq">FAQ</a>
+        <p>Read the Frequently Asked Questions about NuGet and see if your question made the list.</p>
+    </li>
+</ul>
+<div class="license">
+    <a title=".NET Foundation" href="https://www.dotnetfoundation.org"><img src="/Content/Logos/dnf.png" alt=".NET Foundation" /></a>
+    <p>
+        &copy; 2017 .NET Foundation -
+        <a href="/policies/Terms">Terms of Use</a> -
+        <a href="/policies/Privacy">Privacy Policy</a> -
+        <a href="/policies/About">About the Gallery</a> -
+        <a href="https://status.nuget.org">Service status</a>
+    </p>
+    <p>
+        Deployed using <a href="https://octopus.com/" target="referral">Octopus Deploy</a> | Uses <a href="http://fontawesome.io" target="referral">Font Awesome</a> by Dave Gandy
+    </p>
+        <p id="releaseTag">
+        This is the NuGet Gallery
+             version 4.3.0-master.
+                
+                    Deployed from
+                         <a href="https://www.github.com/NuGet/NuGetGallery/commit/d91a591">d91a591</a>.
+                
+                
+                    Built on
+                        <a href="https://www.github.com/NuGet/NuGetGallery/tree/master" title="View the branch.">master</a>.
+                
+                 Built at <span class="s-localtime" data-utc="2017-06-14T05:46:43.0000000Z">2017-06-14</span>.
+
+        
+        
+        You are on NuGetGallery_IN_5.
+    </p>
+
+</div>
+
+                </footer>
+            </div>
+        </div>
+        <script src="/Scripts/all?v=R4CdGNgp_i4xQZOF5pAiFqH7wdq5neFYjyOtGetO8j41"></script>
+
+        
+    
+
+    </body>
+</html>
