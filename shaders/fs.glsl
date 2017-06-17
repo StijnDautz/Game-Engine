@@ -5,7 +5,10 @@ in vec2 uv;							// interpolated texture coordinates
 in vec3 toCamera;					// intersection to camera
 in vec3[4] toLight;					// intersection to light
 uniform vec3 color;					// material color
-uniform sampler2D pixels;			// texture sampler
+uniform float diffuseModf;			// diffuse color modifier
+uniform float specularModf;			// specular color modifier
+uniform float shininess;			// shininess of the object
+uniform sampler2D diffuseMap;		// texture sampler
 uniform sampler2D normalMap;		// normal map
 uniform int lightcount;				// total amount of lights to loop through
 uniform float[4] Alightintensity;	// light intensities
@@ -32,20 +35,21 @@ void main()
 		vec3 L = toLight[c];
 		float dist = length(L);
 		L = normalize(L);
-		diffusecolor = texture2D(pixels, uv) * lightcol;
+		diffusecolor = texture2D(diffuseMap, uv) * lightcol;
 		vec4 diffuse = diffusecolor * max(0.0f, dot(L, normal.xyz));
 				
 		// ambient
 		vec4 ambient = diffusecolor * 0.005f;
 
 		// specular
-		vec4 specular = lightcol * pow(max(0.0f, dot(reflect(-L, normal.xyz), toCamera)), 30f);
+		vec4 specular = lightcol * pow(max(0.0f, dot(reflect(-L, normal.xyz), toCamera)), shininess);
 
 		// output
 		/// compute the light attenuation
 		float attenuation = 1f / (0.1f * dist + .3f * dist * dist);
-		///
-		outputColor += Alightintensity[c] * (ambient + attenuation *  (diffuse + specular));
+		/// final color
+		outputColor += Alightintensity[c] * (ambient + attenuation *  (diffuseModf * diffuse + specularModf * specular));
 	}
+	/// average the final color
 	outputColor /= lightcount;
 }

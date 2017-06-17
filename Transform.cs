@@ -39,6 +39,11 @@ namespace Template_P3
             _model *= Matrix4.CreateFromAxisAngle(axes, angle);
         }
 
+        public void ScaleModel(Vector3 scale)
+        {
+            _model = Matrix4.CreateScale(scale);
+        }
+
         // translate in world space
         public void TranslateWorld(Vector3 translation)
         {

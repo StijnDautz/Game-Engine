@@ -1,0 +1,7 @@
+----------- FEATURES ---------------
+- seamless textures (repeating textures)
+- normal mapping
+- 'infinite' amount of lights (max amount is set to 4, but in theory it's supports an infinite amount)
+- Phong shading with fully customizable materials
+- Scenegraph (lights and cameras included)
+- !!!!!multiple camera!!!!!!

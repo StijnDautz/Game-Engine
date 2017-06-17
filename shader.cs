@@ -20,7 +20,10 @@ namespace Template_P3
         public int uniform_Alightpos;
         public int uniform_Alightcol;
         public int uniform_Alightintensity;
+        public int uniform_diffuseMap;
         public int uniform_normalMap;
+        public int uniform_diffuseModf, uniform_specularModf;
+        public int uniform_shininess;
 
         // constructor
         public Shader(String vertexShader, String fragmentShader)
@@ -48,7 +51,11 @@ namespace Template_P3
             uniform_Alightpos = GL.GetUniformLocation(programID, "Alightpos");
             uniform_Alightcol = GL.GetUniformLocation(programID, "Alightcol");
             uniform_Alightintensity = GL.GetUniformLocation(programID, "Alightintensity");
-            //uniform_normalMap = GL.GetUniformLocation(programID, "normalMap");
+            uniform_diffuseMap = GL.GetUniformLocation(programID, "diffuseMap");
+            uniform_normalMap = GL.GetUniformLocation(programID, "normalMap");
+            uniform_diffuseModf = GL.GetUniformLocation(programID, "diffuseModf");
+            uniform_specularModf = GL.GetUniformLocation(programID, "specularModf");
+            uniform_shininess = GL.GetUniformLocation(programID, "shininess");
         }
 
         // loading shaders

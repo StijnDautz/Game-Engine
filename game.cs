@@ -32,6 +32,8 @@ namespace Template_P3
             timer.Reset();
             timer.Start();
             // create shaders
+            //TODO write different vertex shaders for directional and spotlights, i guess the fragment shader can stay the same
+            //TODO link shader to material
             shader = new Shader("../../shaders/vs.glsl", "../../shaders/fs.glsl");
             postproc = new Shader("../../shaders/vs_post.glsl", "../../shaders/fs_post.glsl");
             // create the render target
@@ -54,12 +56,14 @@ namespace Template_P3
             floor.setMesh("assets/meshes/floor.obj");
             teapot.setMesh("assets/meshes/floor.obj");
             // create material
-            var material = new Material();
-            material.diffuseTexture = Material.GetTexture("assets/plain.png");
-            material.normalTexture = Material.GetTexture("assets/lowpolyrocks_normal.jpg");
+            var rocks = new Material();
+            rocks.diffuseTexture = Material.GetTexture("assets/plain.png");
+            rocks.normalTexture = Material.GetTexture("assets/lowpolyrocks_normal.jpg");
+            rocks.shininess = 0.7f;
+            rocks.SpecularModf = 1f;
             // set material
-            floor.Mesh.material = material;
-            teapot.Mesh.material = material;
+            floor.Mesh.material = rocks;
+            teapot.Mesh.material = rocks;
             // create camera
             var camera = new Camera();
             camera.transform.RotateModel(new Vector3(1, 0, 0), 0.2f * PI);
@@ -67,16 +71,19 @@ namespace Template_P3
             // setup lights
             var light = new Light();
             var light2 = new Light();
-            light2.transform.TranslateModel(new Vector3(4, 8, 0));
-            light.transform.TranslateModel(new Vector3(-4, 8, 0));
-            light.intensity = 50f;
-            light2.intensity = 50f;
+            light2.transform.TranslateModel(new Vector3(4, 20, 0));
+            light.transform.TranslateModel(new Vector3(-4, 20, 0));
+            floor.transform.ScaleModel(new Vector3(5f));
+            floor.transform.TranslateModel(new Vector3(2, 3, 1));
+            var p = floor.transform.worldPos;
+            light.intensity = 100f;
+            light2.intensity = 100f;
             light.color = new Vector3(1, 0.6f, 1);
             // add scenegraphobjects to scenegraph
             sceneGraph.Add(floor);
             //sceneGraph.Add(teapot);
             sceneGraph.Add(camera);
-            sceneGraph.Add(light);
+            //sceneGraph.Add(light);
             sceneGraph.Add(light2);
         }
 
@@ -105,10 +112,6 @@ namespace Template_P3
 
             // call OnRenderFrame on all objects in the scene
             sceneGraph.OnRenderFrame(frameTime);
-
-            //TODO add teapot class
-            // rotate teapot around a point
-            //teapot.transform.RotateAround(new Vector3(0, 0, 3), new Vector3(0, 0, 3), new Vector3(0, 1, 0), a);
 
             // update rotation o teapot
             a += frameTime;

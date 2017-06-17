@@ -25,6 +25,11 @@ namespace Template_P3
             loader.Load(this, "../../" + fileName);
         }
 
+        public int TextureRepeat
+        {
+            set { for(int i = 0; i < vertices.Length; i++) vertices[i].TexCoord = vertices[i].TexCoord * value; }
+        }
+
         // initialization; called during first render
         public void Prepare(Shader shader)
         {
@@ -132,7 +137,6 @@ namespace Template_P3
             public Vector3 Normal;
             public Vector3 Vertex;
             public Vector3 Tangent;
-            public Vector3 BiTangent;
         }
 
         // layout of a single triangle
