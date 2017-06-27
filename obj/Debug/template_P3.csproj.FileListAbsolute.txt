@@ -14,3 +14,6 @@ C:\Users\dautz\Documents\School\Graphics\Game engine\bin\Debug\OpenTK.dll.config
 C:\Users\dautz\Documents\School\Graphics\Game engine\obj\Debug\template_P3.csprojResolveAssemblyReference.cache
 C:\Users\dautz\Documents\School\Graphics\Game engine\obj\Debug\template_P3.exe
 C:\Users\dautz\Documents\School\Graphics\Game engine\obj\Debug\template_P3.pdb
+C:\Users\Jacco Mook\Source\Repos\Game-Engine\bin\Debug\template_P3.exe.config
+C:\Users\Jacco Mook\Source\Repos\Game-Engine\obj\Debug\template_P3.exe
+C:\Users\Jacco Mook\Source\Repos\Game-Engine\obj\Debug\template_P3.pdb
